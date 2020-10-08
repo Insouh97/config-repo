@@ -1,40 +1,35 @@
 server:
-  port: 9200
+  port: 9000
 spring:
-  main:
-     allow-bean-definition-overriding: true
-  jpa:
+  application:
+    name: client-service
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     database: MYSQL
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/clients_db?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    url: jdbc:mysql://${MYSQL_HOST}:3306/clients_db?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
-    password: admin
-  zipkin:
-    base-url: http://localhost:9411
-  sleuth:
-    sampler:
-      probability: 1
+    password:
+
 eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-      
-feign:
-  hystrix:
-    enabled: true
-   
+ client:
+   serviceUrl:
+    defaultZone: http://localhost:8761/eureka/
+
 keycloak:
-  realm: formation-ms
-  auth-server-url: http://localhost:8080/auth
-  resource: client-app
-  credentials:
-    secret: b5f3ff40-ea57-4b08-bda8-e676ee5edb7a
-  principal-attribute: preferred_username
-  bearer-only: true
+    realm: formation-ms
+    auth-server-url: http://localhost:8080/auth
+    resource: client-app
+    credentials:
+      secret: d58d9e7e-2d7f-4359-9fb8-08e96d535ab3
+    principal-attribute: preferred_username
+    bearer-only: true
+
+feign:
+ hystrix:
+     enabled: false
 
 swagger-ui:
   client: swagger-ui
-  secret: 6c37705a-d860-480d-b6b2-74676a7129f8
+  secret: fe72f81f-85f0-478b-b8fb-64d7af398aaf
